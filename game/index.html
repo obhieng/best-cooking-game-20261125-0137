@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sizzle Rush — Ember &amp; Order Kitchen</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #160d08; overflow: hidden; }
+  #game { display: block; width: 100vw; height: 100vh; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<script src="src/config.js"></script>
+<script src="src/random.js"></script>
+<script src="src/orders.js"></script>
+<script src="src/kitchen.js"></script>
+<script src="src/plate.js"></script>
+<script src="src/score.js"></script>
+<script src="src/render.js"></script>
+<script src="src/input.js"></script>
+<script src="src/shots.js"></script>
+<script src="src/main.js"></script>
+<script>
+  // Boot: fresh state, optional staged screenshot (?shot=cover|mid|serve|rush),
+  // then the loop. Nothing here loads over the network.
+  var state = SR.createState(20261125);
+  var shot = new URLSearchParams(location.search).get('shot');
+  if (shot) SR.stageShot(state, shot);
+  // Debug handle for automated play-testing only; the game never reads it.
+  window.__sizzle = { state: state, SR: SR };
+  SR.boot(document.getElementById('game'), state);
+</script>
+</body>
+</html>
